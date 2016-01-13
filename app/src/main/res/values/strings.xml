@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FetchFromWired</string>
+    <string name="connecting">Fetch From Wired is connecting</string>
+    <string name="main_activity_header">Fetch From Wired</string>
+</resources>
