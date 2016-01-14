@@ -13,6 +13,7 @@ import java.util.List;
 
 import sample.org.fetchfromwired.connection.GetListener;
 import sample.org.fetchfromwired.connection.model.ResponseEventModel;
+import sample.org.fetchfromwired.link.HttpLink;
 
 
 public class BaseGetAsyncTask<T>  extends AsyncTask<String, Void, String> {
@@ -65,10 +66,17 @@ public class BaseGetAsyncTask<T>  extends AsyncTask<String, Void, String> {
 	public String readGetFeed(String URL, String uriParam) throws Exception {
 
 		String uri = URL;
+
 		String responseData = "";
 		if (uriParam != null && !uriParam.equalsIgnoreCase("")) {
 
-			uri += "/" + uriParam;
+			if (uri==HttpLink.getWiredLink()) {
+				uri += "/" + uriParam;
+			}
+			if(uri==HttpLink.getYandexLink())
+			{
+				uri+=uriParam;
+			}
 			this.methodName = uriParam;
 		}
 

@@ -18,6 +18,7 @@ import sample.org.fetchfromwired.connection.listener.WiredSL;
 import sample.org.fetchfromwired.connection.model.ResponseEventModel;
 import sample.org.fetchfromwired.json.model.ArticleModel;
 import sample.org.fetchfromwired.link.HttpLink;
+import sample.org.fetchfromwired.link.IntentKey;
 
 public class MainActivity extends BaseActivity {
 
@@ -32,14 +33,15 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
        // articleModel=new ArticleModel();
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        WiredSL wiredSL = new WiredSL(MainActivity.this,getWiredServiceListener, HttpLink.getHttpLink());
+        WiredSL wiredSL = new WiredSL(MainActivity.this,getWiredServiceListener, HttpLink.getWiredLink());
         wiredSL.sendWiredData("");
         showProgress(getResources().getString(R.string.connecting));
     }
 
     public void  openView(){
         Intent intent = new Intent(this, ArticleViewActivity.class);
-        intent.putExtra("data",articleModel.getContent().getRendered());
+        intent.putExtra(IntentKey.LINK.name(),articleModel.getLink());
+        intent.putExtra(IntentKey.CONTENT.name(),articleModel.getContent().getRendered());
         startActivity(intent);
     }
 
